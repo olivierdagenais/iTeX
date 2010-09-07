@@ -4,7 +4,7 @@
 % This is a simple template for a LaTeX document using the "article" class.
 % See "book", "report", "letter" for other types of document.
 
-\documentclass[11pt]{article} % use larger type; default would be 10pt
+\documentclass[11pt]{article}% use larger type; default would be 10pt 
 
 \usepackage[utf8]{inputenc} % set input encoding (not needed with XeLaTeX)
 
@@ -60,13 +60,16 @@
 %\date{} % Activate to display a given date or no date (if empty),
          % otherwise the current date is printed
 
-
 \begin{document}
 \maketitle
 
+\begin{abstract}
+An article about stuff
+\end{abstract}
+
 \section{First section}
 
-Your first text goes here. \#  \$  \%  \^{}  \&  \_  \{  \}  \~{} \textbackslash less $<$ greater $>$ \\
+Your first text goes here. \#  \$  \%  \^{}  \&  \_  \{  \}  \~{} \textbackslash less $<$ greater $>$\\
 Add $a$ squared and $b$ squared
 to get $c$ squared.  Or, using
 a more mathematical approach:
@@ -90,8 +93,9 @@ a  +  b  +  c  +  d  +  e  +  f
 \lim_{x  \rightarrow  0}
 \frac{\sin  x}{x}=1
 \end{equation*}
+            
+        
 \section{Second section}
-
 More text.
 
 \end{document}

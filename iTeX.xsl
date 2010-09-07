@@ -5,12 +5,16 @@
 
     <xsl:template match="/iTeX">
         <xsl:apply-templates select="preamble" />
-        <xsl:text>
-\begin{document}</xsl:text>
+
+        <xsl:call-template name="command">
+            <xsl:with-param name="name" select="'begin'" />
+            <xsl:with-param name="param" select="'document'" />
+        </xsl:call-template>
         <xsl:apply-templates select="document"/>
-        <xsl:text>
-\end{document}
-</xsl:text>
+        <xsl:call-template name="command">
+            <xsl:with-param name="name" select="'end'" />
+            <xsl:with-param name="param" select="'document'" />
+        </xsl:call-template>
     </xsl:template>
 
     <xsl:template match="text()">
@@ -112,14 +116,19 @@
     
     <xsl:template match="raw">
         <xsl:if test="@begin">
-            <xsl:text>\begin{</xsl:text><xsl:value-of select="@begin" /><xsl:text>}</xsl:text>
+            <xsl:call-template name="command">
+                <xsl:with-param name="name" select="'begin'" />
+                <xsl:with-param name="param" select="@begin" />
+            </xsl:call-template>
         </xsl:if>
         <xsl:text></xsl:text>
         <xsl:value-of select="." />
         <xsl:text></xsl:text>
         <xsl:if test="@begin">
-            <xsl:text>\end{</xsl:text><xsl:value-of select="@begin" /><xsl:text>}
-</xsl:text>
+            <xsl:call-template name="command">
+                <xsl:with-param name="name" select="'end'" />
+                <xsl:with-param name="param" select="@begin" />
+            </xsl:call-template>
         </xsl:if>
     </xsl:template>
 
@@ -129,17 +138,21 @@
             <xsl:with-param name="opt" select="@opt" />
             <xsl:with-param name="param" select="@param" />
         </xsl:call-template>
+        <xsl:apply-templates select="* | node() | comment()" />
     </xsl:template>
     
     <xsl:template match="block">
-        <xsl:if test="@command">
-            <xsl:call-template name="command">
-                <xsl:with-param name="name" select="@command" />
-                <xsl:with-param name="opt" select="@opt" />
-                <xsl:with-param name="param" select="@param" />
-            </xsl:call-template>
-        </xsl:if>
+        <xsl:call-template name="command">
+            <xsl:with-param name="name" select="'begin'" />
+            <xsl:with-param name="opt" select="@opt" />
+            <xsl:with-param name="param" select="@param" />
+        </xsl:call-template>
         <xsl:apply-templates select="* | node() | comment()" />
+        <xsl:call-template name="command">
+            <xsl:with-param name="name" select="'end'" />
+            <xsl:with-param name="opt" select="@opt" />
+            <xsl:with-param name="param" select="@param" />
+        </xsl:call-template>
     </xsl:template>
 
     <xsl:template match="br">
