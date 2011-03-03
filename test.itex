@@ -74,6 +74,8 @@
 
 Your first text goes here. #  $  %  ^  &amp;  _  {  }  ~ \ less <e>&lt;</e> greater <e>&gt;</e> <br />
 Add <e>a</e> squared and <e>b</e> squared
+<!-- Note: this comment contains a line-break
+and should be rendered as two one-line comments -->
 to get <e>c</e> squared.  Or, using
 a more mathematical approach:
 <e>a^2  +  b^2  =  c^2</e>
